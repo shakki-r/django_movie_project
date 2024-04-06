@@ -50,3 +50,8 @@ def login(request):
             messages.info(request,'user is not registerd',extra_tags='user')
             return render(request,'login.html')
     return render(request,'login.html')
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
