@@ -2,10 +2,12 @@ from django.contrib import messages, auth
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 
+@login_required(login_url='user:login')
 def index(request):
     return render(request,'index.html')
 
@@ -55,3 +57,11 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+@login_required(login_url='user:login')
+def profile(request):
+    from django.contrib.auth.models import User
+
+
+
+    return render(request,'profile.html')
