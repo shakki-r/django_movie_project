@@ -74,11 +74,11 @@
                     <li><a href="./shop-details.html">Shop Details</a></li>
                     <li><a href="./shoping-cart.html">Shoping Cart</a></li>
                     <li><a href="./checkout.html">Check Out</a></li>
-                    <li><a href="./blog-details.html">Blog Details</a></li>
+                    <li><a href="./blog-details.html">My Movies</a></li>
                 </ul>
             </li>
-            <li><a href="./blog.html">Blog</a></li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="{% url 'cart_movie:my_movies' %}">My Movies</a></li>
+            <li><a href="{% url 'user:profile' %}">Profile</a></li>
 
 
             <li><a href="{% url 'user:logout' %}">
@@ -90,9 +90,6 @@
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
-
-
-
 
 
 </div>
@@ -153,11 +150,11 @@
                                 <li><a href="./shop-details.html">Shop Details</a></li>
                                 <li><a href="./shoping-cart.html">Shoping Cart</a></li>
                                 <li><a href="./checkout.html">Check Out</a></li>
-                                <li><a href="./blog-details.html">Blog Details</a></li>
+                                <li><a href="./blog-details.html">My Movies</a></li>
                             </ul>
                         </li>
-                        <li><a href="./blog.html">Blog</a></li>
-                        <li><a href="./contact.html">Contact</a></li>
+                        <li><a href="{% url 'cart_movie:my_movies' %}">My Movies</a></li>
+                        <li><a href="{% url 'user:profile' %}">Profile</a></li>
                     </ul>
                 </nav>
             </div>
@@ -189,6 +186,7 @@
                         <span>All departments</span>
                     </div>
                     <ul>
+
                         <li><a href="#">Fresh Meat</a></li>
                         <li><a href="#">Vegetables</a></li>
                         <li><a href="#">Fruit & Nut Gifts</a></li>
@@ -200,6 +198,7 @@
                         <li><a href="#">Papayaya & Crisps</a></li>
                         <li><a href="#">Oatmeal</a></li>
                         <li><a href="#">Fresh Bananas</a></li>
+
                     </ul>
                 </div>
             </div>
@@ -242,49 +241,49 @@
 </section>
 <!-- Hero Section End -->
 {% if user.is_authenticated %}
-  <style>
-        /* Example CSS */
-        .welcome-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            height: 200px;
-            width:70%;
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 60px;
-            border: 5px solid #7fad39;
-            transition: opacity 0.9s ease-in-out; /* Adding transition effect */
-        }
-        .disabled {
-            opacity: 0; /* Initially set opacity to 0 when disabled */
-        }
-       .disable{
-            display: none;
-        }
-    </style>
-    <h1 class="welcome-message">Welcome {{user.username}} 🎬</h1>
+<style>
+    /* Example CSS */
+    .welcome-message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        height: 200px;
+        width:70%;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 60px;
+        border: 5px solid #7fad39;
+        transition: opacity 0.9s ease-in-out; /* Adding transition effect */
+    }
+    .disabled {
+        opacity: 0; /* Initially set opacity to 0 when disabled */
+    }
+   .disable{
+        display: none;
+    }
+</style>
+<h1 class="welcome-message">Welcome {{user.username}} 🎬</h1>
 
-    <script>
-        // Check if animation has already been played
-        if (!localStorage.getItem('animationPlayed')) {
-            let we = document.querySelector('.welcome-message');
-            setTimeout(() => {
-                we.classList.add('disabled');
-                localStorage.setItem('animationPlayed', true); // Set flag indicating animation has been played
-            }, 1000);
-            setTimeout(() => {
-                we.classList.add('disable');
-            }, 2000);
-        } else {
-            let we = document.querySelector('.welcome-message');
-            we.classList.add('disable'); // Hide the message immediately if animation has been played before
-        }
-    </script>
+<script>
+    // Check if animation has already been played
+    if (!localStorage.getItem('animationPlayed')) {
+        let we = document.querySelector('.welcome-message');
+        setTimeout(() => {
+            we.classList.add('disabled');
+            localStorage.setItem('animationPlayed', true); // Set flag indicating animation has been played
+        }, 1000);
+        setTimeout(() => {
+            we.classList.add('disable');
+        }, 2000);
+    } else {
+        let we = document.querySelector('.welcome-message');
+        we.classList.add('disable'); // Hide the message immediately if animation has been played before
+    }
+</script>
 
 {% else %}
 <script>
@@ -296,47 +295,10 @@
 {% endif %}
 
 
-
-
-
-
-
 {% if user.is_authenticated %}
 
 <!-- Categories Section Begin -->
-<section class="categories">
-    <div class="container">
-        <div class="row">
-            <div class="categories__slider owl-carousel">
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-1.jpg' %}">
-                        <h5><a href="#">Fresh Fruit</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-2.jpg' %}">
-                        <h5><a href="#">Dried Fruit</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-3.jpg' %}">
-                        <h5><a href="#">Vegetables</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-4.jpg' %}">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{% static 'img/categories/cat-5.jpg' %}">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 <!-- Categories Section End -->
 
 <!-- Featured Section Begin -->
@@ -345,139 +307,42 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>Featured Product</h2>
+                    <h2>Movies</h2>
                 </div>
                 <div class="featured__controls">
                     <ul>
                         <li class="active" data-filter="*">All</li>
-                        <li data-filter=".oranges">Oranges</li>
-                        <li data-filter=".fresh-meat">Fresh Meat</li>
-                        <li data-filter=".vegetables">Vegetables</li>
-                        <li data-filter=".fastfood">Fastfood</li>
+                        <li data-filter=".oranges">Action</li>
+                        <li data-filter=".fresh-meat">
+                            Romance
+                        </li>
+                        <li data-filter=".vegetables">Thriller</li>
+                        <li data-filter=".fastfood">Drama
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="row featured__filter">
-            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                <div class="featured__item">
-                    <a href="register/">
-                         <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-1.jpg' %}">
 
-                    </div>
+
+            {% for i in context.movie %}
+            <div class="col-lg-3 col-md-4 col-sm-6  ">
+                <div class="featured__item">
+                    <a href="{% url 'cart_movie:movie_info' i.id %}">
+                        <div class="featured__item__pic set-bg" data-setbg="{{i.image.url}}">
+
+                        </div>
                     </a>
 
                     <div class="featured__item__text">
-                        <h6><a href="#">K.G.F: Chapter 2 (2022)</a></h6>
+                        <h6><a href="{% url 'cart_movie:movie_info' i.id %}">{{i.title}} ({{ i.release_date|date:"Y" }})</a></h6>
 
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-2.jpg' %}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Crab Pool Security</a></h6>
-                        <h5>$30.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-3.jpg' %}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Crab Pool Security</a></h6>
-                        <h5>$30.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-4.jpg' %}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Crab Pool Security</a></h6>
-                        <h5>$30.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-5.jpg' %}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Crab Pool Security</a></h6>
-                        <h5>$30.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-6.jpg' %}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Crab Pool Security</a></h6>
-                        <h5>$30.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-7.jpg' %}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Crab Pool Security</a></h6>
-                        <h5>$30.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-8.jpg' %}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="#">Crab Pool Security</a></h6>
-                        <h5>$30.00</h5>
-                    </div>
-                </div>
-            </div>
+
+            {% endfor %}
         </div>
     </div>
 </section>

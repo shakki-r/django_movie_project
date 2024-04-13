@@ -1,15 +1,24 @@
 from django.contrib import messages, auth
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from datetime import datetime
 from django.contrib.auth.models import User
+from cart_movie.models import Movies,Genres
 from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 
-@login_required(login_url='user:login')
+
 def index(request):
-    return render(request,'index.html')
+    current_year = datetime.now().year
+    YEARS_CHOICES = [year for year in range(current_year, current_year - 50, -1)]
+    movie=Movies.objects.all()
+    context={
+        'year':YEARS_CHOICES,
+        'movie':movie
+    }
+    return render(request,'index.html',{'context':context})
 
 
 def register(request):
@@ -58,10 +67,30 @@ def logout(request):
     auth.logout(request)
     return redirect('/')
 
-@login_required(login_url='user:login')
+
 def profile(request):
-    from django.contrib.auth.models import User
-
-
-
     return render(request,'profile.html')
+
+
+def edit_profile(request,id):
+
+    user=User.objects.get(id=id)
+    user_details={
+        'status':True,
+        'user':user
+
+    }
+
+    if request.method=='POST':
+        firstname=request.POST['firstname']
+        lastname=request.POST['lastname']
+        email=request.POST['email']
+
+        user.first_name=firstname
+        user.last_name=lastname
+        user.email=email
+
+        user.save()
+        return redirect('user:profile')
+
+    return render(request,'profile.html',{'user_details':user_details})
