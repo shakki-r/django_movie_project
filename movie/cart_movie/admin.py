@@ -3,8 +3,10 @@ from .models import Genres,Movies,Review
 # Register your models here.
 
 
-admin.site.register(Genres)
 
+class CreateGenres(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('genres',)}
+admin.site.register(Genres,CreateGenres)
 
 
 

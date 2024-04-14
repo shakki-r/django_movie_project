@@ -94,12 +94,7 @@ textarea:focus {
 	outline: none;
 }
 
-a:hover,
-a:focus {
-	text-decoration: none;
-	outline: none;
-	color: #ffffff;
-}
+
 
 ul,
 ol {
@@ -1647,12 +1642,7 @@ display: block;
 	transition: all, 0.3s;
 }
 
-.product__pagination a:hover,
-.blog__pagination a:hover {
-	background: #7fad39;
-	border-color: #7fad39;
-	color: #ffffff;
-}
+
 
 .product__pagination a:last-child,
 .blog__pagination a:last-child {
@@ -2723,11 +2713,7 @@ display: block;
 	margin-right: 0;
 }
 
-.footer__widget .footer__widget__social a:hover {
-	background: #7fad39;
-	color: #ffffff;
-	border-color: #ffffff;
-}
+
 
 .footer__copyright {
 	border-top: 1px solid #ebebeb;

@@ -50,7 +50,7 @@ def movie_details(request, id):
 
 def edit_movie(request,id):
     movie=Movies.objects.get(id=id)
-    print(movie.release_date)
+
     genres=Genres.objects.all()
     if request.method=='POST':
         title = request.POST['title']
@@ -64,7 +64,7 @@ def edit_movie(request,id):
             release_date = request.POST['release_date']
         except KeyError:
             release_date = movie.release_date
-            print(release_date)
+
 
         desc = request.POST['description']
         actor = request.POST['actors']

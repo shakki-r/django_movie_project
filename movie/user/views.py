@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from datetime import datetime
 from django.contrib.auth.models import User
 from cart_movie.models import Movies,Genres
+from django.utils.text import slugify
 from django.contrib.auth.decorators import login_required
 
 
@@ -13,12 +14,36 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     current_year = datetime.now().year
     YEARS_CHOICES = [year for year in range(current_year, current_year - 50, -1)]
-    movie=Movies.objects.all()
+
+    movie = Movies.objects.all()
+
+
+    genres=Genres.objects.all()
+
+
     context={
-        'year':YEARS_CHOICES,
-        'movie':movie
+
+        'movie':movie,
+        'genres':genres,
     }
+
     return render(request,'index.html',{'context':context})
+
+
+
+def genres_filter(request,slug):
+
+    genres = Genres.objects.all()
+    movie = Movies.objects.all().filter(genres__genres=slug)
+    context={
+        'movie':movie,
+        'genres': genres,
+
+    }
+
+    return render(request,'index.html',{'context':context})
+
+
 
 
 def register(request):
@@ -94,3 +119,28 @@ def edit_profile(request,id):
         return redirect('user:profile')
 
     return render(request,'profile.html',{'user_details':user_details})
+
+
+def search(request):
+    if 'q' in request.GET:
+
+        result=False
+        serach_value=request.GET.get('q')
+        movies = Movies.objects.all().filter(title__contains=serach_value)
+        slug_value=slugify(serach_value)
+        genres_serach=Movies.objects.all().filter(genres__slug=slug_value)
+        if genres_serach:
+            movies=genres_serach
+
+
+        if movies:
+            result=True
+
+        context={
+            'search_value':serach_value,
+            'movies':movies,
+            'result':result
+
+        }
+
+    return render(request,'search.html',{'context':context})
