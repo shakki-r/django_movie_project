@@ -89,3 +89,9 @@ def edit_movie(request,id):
 
 
     return render(request,'edit_movie.html',{'movie':movie,'genres':genres})
+
+
+def delete_movie(request,id):
+    movie=Movies.objects.get(id=id)
+    movie.delete()
+    return redirect('/')

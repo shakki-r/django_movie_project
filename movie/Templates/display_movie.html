@@ -164,13 +164,16 @@
                 <p class="movie-info">Release Date: {{movie.release_date}}</p>
                 <p class="movie-info">Actor Name: {{movie.actor}}</p>
                 <p class="movie-description">Description: {{movie.description}}</p>
-                <a target="_blank" class="btn btn-danger" href="{{movie.youtube}}">Youtube</a>
+                <a target="_blank" class="btn btn-dark" href="{{movie.youtube}}">Youtube</a>
             </div>
 
             <div>
                 <a class="btn btn-info" id="add_review" href="">Add your Review</a>
                 {% if movie.added_user == user %}
                 <a class="btn btn-success" href="{% url 'cart_movie:edit_movie' movie.id %}">Edit</a>
+                <a class="btn btn-danger" href="{% url 'cart_movie:delete_movie' movie.id %}">Delete</a>
+
+
                 {% endif %}
 
             </div>
@@ -193,7 +196,8 @@
                 <li class="list-group-item mt-3">
 
                     <div>
-                        <strong style="color: #7fad39;">{{i.added_user}} <span class="blue-tick">&#10004;</span> </strong>  <br>
+                        <strong style="color: #7fad39;">{{i.added_user}} <span class="blue-tick">&#10004;</span>
+                        </strong> <br>
                         {{i.review}} <br>
                         <strong>Rating:</strong> {{i.rating}}/5 <p style="font-size: 30px;">&#9733</p>
                     </div>
