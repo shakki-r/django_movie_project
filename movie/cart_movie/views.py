@@ -29,6 +29,7 @@ def add_movie(request):
 def my_movies(request):
     user = request.user
     list_movie = Movies.objects.filter(added_user=user)
+
     return render(request, 'my_movies.html', {'list_movie': list_movie})
 
 

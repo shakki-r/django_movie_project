@@ -9,19 +9,31 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
         }
         form {
             max-width: 600px;
             margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
         }
         input[type="text"],
         input[type="file"],
         textarea,
-        select {
+        select,
+        input[type="date"],
+        input[type="url"] {
             width: 100%;
             padding: 8px;
             margin-bottom: 15px;
@@ -45,7 +57,8 @@
     </style>
 </head>
 <body>
-<h1>Create Movie</h1>
+{% include 'navbar.html' %}
+<h1>Edit Movie</h1>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <label for="title">Title:</label>
@@ -54,26 +67,22 @@
     <label for="poster">Poster:</label>
     <input type="file" id="poster" name="poster" value="{{ movie.image.url }}" accept="image/*" >
 
-
     <label for="description">Description:</label>
     <textarea id="description" name="description" rows="5"  required>{{movie.description}}</textarea>
 
-  <label for="release_date">Release Date:</label>
-<input type="date" id="release_date" name="release_date"  value="{{movie.release_date |date:'Y-m-d'}}" >
-
+    <label for="release_date">Release Date:</label>
+    <input type="date" id="release_date" name="release_date"  value="{{movie.release_date |date:'Y-m-d'}}" >
 
     <label for="actors">Actors:</label>
     <textarea id="actors" name="actors" rows="3">{{movie.actor}}</textarea>
 
-
     <label for="genres">Category:</label>
-    <select name="genres" id="genres"required>
+    <select name="genres" id="genres" required>
         <option>{{movie.genres}}</option>
         {% for i in genres %}
         <option>{{i}}</option>
         {% endfor %}
     </select>
-
 
     <label for="trailer_link">YouTube Trailer Link:</label>
     <input type="url" id="trailer_link" name="trailer_link" value="{{movie.youtube}}" required>

@@ -9,26 +9,42 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
         }
         form {
             max-width: 600px;
             margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-weight: bold;
         }
         input[type="text"],
         input[type="file"],
         textarea,
-        select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
+        select,
+        input[type="date"],
+        input[type="url"] {
+            width: calc(100% - 16px);
+            padding: 10px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
             resize: vertical;
+        }
+        input[type="file"] {
+            padding-top: 6px;
+            padding-bottom: 6px;
         }
         button[type="submit"] {
             background-color: #4CAF50;
@@ -45,6 +61,7 @@
     </style>
 </head>
 <body>
+{% include 'navbar.html' %}
     <h1>Create Movie</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -61,8 +78,7 @@
         <input type="date" id="release_date" name="release_date" required>
 
         <label for="actors">Actors:</label>
-<textarea id="actors" name="actors" rows="3"></textarea>
-
+        <textarea id="actors" name="actors" rows="3"></textarea>
 
         <label for="genres">Category:</label>
         <select name="genres" id="genres" required>
@@ -70,7 +86,6 @@
             <option>{{i}}</option>
             {% endfor %}
         </select>
-
 
         <label for="trailer_link">YouTube Trailer Link:</label>
         <input type="url" id="trailer_link" name="trailer_link" required>

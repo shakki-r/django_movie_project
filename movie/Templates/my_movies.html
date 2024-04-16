@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
 </head>
+{% if user.is_authenticated %}
+{% include 'navbar.html' %}
 <section class="featured spad">
  <div class="container">
   <a class="btn btn-info ml-auto" href="{% url 'cart_movie:add_movie' %}">Add Movie</a>
@@ -56,7 +58,7 @@
         </div>
     </div>
 </section>
-
+{% endif %}
 <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>

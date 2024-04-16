@@ -123,9 +123,15 @@ def edit_profile(request,id):
 
 def search(request):
     if 'q' in request.GET:
+        serach_value = request.GET.get('q')
+        if serach_value =="":
+            return redirect('/')
+
+
+
 
         result=False
-        serach_value=request.GET.get('q')
+
         movies = Movies.objects.all().filter(title__contains=serach_value)
         slug_value=slugify(serach_value)
         genres_serach=Movies.objects.all().filter(genres__slug=slug_value)
